@@ -1,58 +1,69 @@
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=x-sjis">
-    <title>Kanji Page</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=x-sjis">
+        <title>Kanji Page</title>
 
-    <!--<script language="javascript" src="joyo.js"></script>-->
-    <script language="javascript" src="index.js"></script>
-    <script language="javascript" src="./language/jp/k1.js"></script>
-    <script language="javascript" src="./language/jp/k2.js"></script>
-    <script language="javascript" src="./language/jp/k3.js"></script>
-    <script language="javascript" src="./language/jp/k4.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<span id="unknown"></span>
-<span id="result"></span>
+        <script language="javascript" src="index.js"></script>
+        <script language="javascript" src="./language/jp/k1.js"></script>
+        <script language="javascript" src="./language/jp/k2.js"></script>
+        <script language="javascript" src="./language/jp/k3.js"></script>
+        <script language="javascript" src="./language/jp/k4.js"></script>
+        <!--<script language="javascript" src="./language/jp/kj.js"></script>-->
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <span id="unknown"></span>
+        <span id="result"></span>
 
-<table id="choicetable" cellSpacing="7" cellPadding="0" border="0">
-    <tbody>
-    <tr>
-        <td onmouseup="checkanswer(f[1])"><span id="1">*</span></td>
-        <td onmouseup="checkanswer(f[2])"><span id="2">*</span></td>
-        <td onmouseup="checkanswer(f[3])"><span id="3">*</span></td>
-        <td onmouseup="checkanswer(f[4])"><span id="4">*</span></td>
-    </tr>
-    <tr>
-        <td onmouseup="checkanswer(f[5])"><span id="5">*</span></td>
-        <td onmouseup="checkanswer(f[6])"><span id="6">*</span></td>
-        <td onmouseup="checkanswer(f[7])"><span id="7">*</span></td>
-        <td onmouseup="checkanswer(f[8])"><span id="8">*</span></td>
-    </tr>
-    </tbody>
-</table>
+        <table id="choicetable" cellSpacing="7" cellPadding="0" border="0">
+            <tbody>
+                <tr>
+                    <td onmouseup="checkanswer(f[1])"><span id="1">*</span></td>
+                    <td onmouseup="checkanswer(f[2])"><span id="2">*</span></td>
+                    <td onmouseup="checkanswer(f[3])"><span id="3">*</span></td>
+                    <td onmouseup="checkanswer(f[4])"><span id="4">*</span></td>
+                </tr>
+                <tr>
+                    <td onmouseup="checkanswer(f[5])"><span id="5">*</span></td>
+                    <td onmouseup="checkanswer(f[6])"><span id="6">*</span></td>
+                    <td onmouseup="checkanswer(f[7])"><span id="7">*</span></td>
+                    <td onmouseup="checkanswer(f[8])"><span id="8">*</span></td>
+                </tr>
+            </tbody>
+        </table>
 
-<table id="changegame" cellSpacing="7" cellPadding="0" border="0">
-    <tbody>
-    <tr><td id="newquizfield" onmouseup="startquiz()">Nuovo Gioco</td></tr>
-    <tr><td id="samequizfield" onmouseup="sameway()">Stesso Gioco</td></tr>
-    </tbody>
-</table>
+        <div id="controls">
+            <table id="changegame" cellSpacing="7" cellPadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td id="newquizfield" onmouseup="startquiz()">Nuovo Gioco</td>
+                    </tr>
+                    <tr>
+                        <td id="samequizfield" onmouseup="sameway()">Stesso Gioco</td>
+                    </tr>
+                </tbody>
+            </table>
 
-<div>
-    <span id="leveltextfield">Livello:</span>
-    <span id="levelfield"></span>
-</div>
-<div>
-    <span id="lefttextfield">Rimanenti:</span>
-    <span id="leftfield"></span>
-</div>
+            <table id="stats" cellSpacing="7" cellPadding="0" border="0">
+                <tbody>
+                    <tr>
+                        <td id="leveltextfield">Livello:</td>
+                        <td id="levelfield"></td>
+                    </tr>
+                    <tr>
+                        <td id="lefttextfield">Rimanenti:</td>
+                        <td id="leftfield"></td>
+                    </tr>
+                </tbody>
+            </table>
 
-<form id="formatform">
-    <input onclick="setformat(1,2)" type="radio" name="kanji" value="0" checked>Kanji -> Italiano
-    <input onclick="setformat(1,3)" type="radio" name="kanji" value="1">Kanji -> Kana
-    <input onclick="setformat(2,1)" type="radio" name="kanji" value="2">Italiano -> Kanji
-    <input onclick="setformat(3,1)" type="radio" name="kanji" value="3">Kana -> Kanji
-</form>
-</body>
+            <br/>
+            <form id="formatform">
+                <div><input onclick="setformat(1,2)" type="radio" name="kanji" value="0" checked>Kanji -> Italiano</div>
+                <div><input onclick="setformat(1,3)" type="radio" name="kanji" value="1">Kanji -> Kana</div>
+                <div><input onclick="setformat(2,1)" type="radio" name="kanji" value="2">Italiano -> Kanji</div>
+                <div><input onclick="setformat(3,1)" type="radio" name="kanji" value="3">Kana -> Kanji</div>
+            </form>
+        </div>
+    </body>
 </html>

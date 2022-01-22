@@ -34,21 +34,19 @@ let h;
 let kana;
 let kanatoenglish;
 
-
 function batsu() {
     // console.log('batsu');
-    document.getElementById("result").innerHTML = "<IMG SRC='./images/batsu.GIF' name='batsu' HEIGHT='125' WIDTH='124'";
+    document.getElementById("unknown").innerHTML = "<img id='image' src='./images/batsu.GIF' name='batsu'>";
 }
 
 function maru() {
     // console.log('maru');
-    document.getElementById("result").innerHTML = "<IMG SRC='./images/maru.GIF' name='maru' HEIGHT='125' WIDTH='124'>";
+    document.getElementById("unknown").innerHTML = "<img id='image' src='./images/maru.GIF' name='maru'>";
 }
 
 function cleare() {
     // console.log('cleare');
-    document.getElementById("result").innerHTML = "<IMG SRC='./images/maru.GIF' name='maru' HEIGHT='0' WIDTH='0'>" +
-        "<IMG SRC='./images/batsu.GIF' name='batsu' HEIGHT='0' WIDTH='0'>";
+    document.getElementById("unknown").innerHTML = "";
 }
 
 function cleark() {
@@ -215,14 +213,6 @@ function choices(x, kanatoenglish) {
     }
 }
 
-// function showcorrect() {
-//     // console.log('showcorrect');
-//     for (let i = 1; i < 9; i++)
-//         if (c != i)
-//             document.getElementById(i).innerHTML = " ";
-//     c = 0;
-// }
-
 function setformat(que, ans) {
     // console.log('setformat');
     ques = que;
@@ -243,7 +233,7 @@ function sameway() {
 }
 
 function setLevel() {
-    // console.log('setLevel');
+    console.log('setLevel');
     itemnumber = left;
     kanawereusing = 2;
 
@@ -287,6 +277,7 @@ function startquiz() {
     // console.log('startquiz');
     question = ques;
     answer = answ;
+    badlevel = 1;
 
     while (badlevel == 1) {
         badlevel = 1;
@@ -297,7 +288,7 @@ function startquiz() {
         if (answer == 3) {
             biglevel = 1
         }
-        let level = prompt('Scegli livello: 1-67, o 1a-6a, o tutti');
+        level = prompt('Scegli livello: 1-67, o 1a-6a, o tutti');
 
         if (parseInt(level) < 68) {
             badlevel = 0;
