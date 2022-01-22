@@ -1,0 +1,93 @@
+body {
+    background-color: black;
+    color: white;
+}
+
+#unknown {
+    display: flex;
+    justify-content: center;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 100px;
+    COLOR: white;
+}
+
+#result {
+    FONT-WEIGHT: bold;
+    WIDTH: 877px;
+    TOP: 50px;
+    HEIGHT: 124px;
+    TEXT-ALIGN: center;
+}
+
+#choiceTable {
+    cursor: default;
+    font-family: sans-serif;
+    font-size: 20px;
+    text-align: center;
+    width: 942px;
+    height: 311px;
+}
+
+#choiceTable td {
+    background-color: darkolivegreen;
+    width: 150px;
+    height: 108px;
+    cursor: hand;
+    color: white;
+}
+
+#choiceTable td span {
+    width: 138px;
+}
+
+#changegame {
+    CURSOR: default;
+    FONT-FAMILY: sans-serif;
+    width: 240px;
+}
+
+#newquizfield {
+    background-color: darkblue;
+    cursor: hand;
+    height: 35px;
+    text-align: center;
+}
+
+#samequizfield {
+    background-color: darkblue;
+    width: 120px;
+    cursor: hand;
+    height: 35px;
+    text-align: center;
+}
+
+#leveltextfield {
+    width: 41px;
+    height: 15px;
+}
+
+#levelfield {
+}
+
+#lefttextfield {
+    width: 61px;
+    height: 19px;
+}
+
+#leftfield {
+}
+
+#optiontextfield {
+    width: 368px;
+    height: 1px;
+}
+
+#formatfield {
+    width: 986px;
+    height: 78px;
+}
+
+#formatform {
+    width: 986px;
+    height: 78px;
+}
