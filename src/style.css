@@ -9,14 +9,17 @@ body {
     FONT-WEIGHT: bold;
     FONT-SIZE: 100px;
     COLOR: white;
+    height: 150px;
 }
 
 #result {
-    FONT-WEIGHT: bold;
-    WIDTH: 877px;
-    TOP: 50px;
-    HEIGHT: 124px;
-    TEXT-ALIGN: center;
+    display: flex;
+    justify-content: center;
+}
+
+#image {
+    width: 125px;
+    height: 125px;
 }
 
 #choiceTable {
@@ -38,6 +41,12 @@ body {
 
 #choiceTable td span {
     width: 138px;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #changegame {
@@ -74,20 +83,4 @@ body {
     height: 19px;
 }
 
-#leftfield {
-}
 
-#optiontextfield {
-    width: 368px;
-    height: 1px;
-}
-
-#formatfield {
-    width: 986px;
-    height: 78px;
-}
-
-#formatform {
-    width: 986px;
-    height: 78px;
-}
