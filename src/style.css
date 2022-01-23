@@ -70,17 +70,18 @@ body {
     text-align: center;
 }
 
-#leveltextfield {
-    width: 41px;
-    height: 15px;
+#stats {
+    display: flex;
+    justify-items: center;
 }
 
-#levelfield {
+#stats td:first-child {
+    width: 150px;
+    text-align: right;
 }
 
-#lefttextfield {
-    width: 61px;
-    height: 19px;
+#stats td:last-child {
+    width: 150px;
+    text-align: left;
 }
-
 
