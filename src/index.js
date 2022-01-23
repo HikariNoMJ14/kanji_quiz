@@ -99,7 +99,6 @@ function choice() {
         g = itemcount[h];
     }
     x = itemloc[h];
-    return h;
 }
 
 function otherchoice() {
@@ -270,6 +269,8 @@ function newkanji() {
     if (question == 1) {
         document.getElementById("unknown").innerHTML = kj[x][0];
     }
+
+    document.getElementById("debugfield").innerHTML = h;
     choices(x, kanatoenglish);
 }
 
