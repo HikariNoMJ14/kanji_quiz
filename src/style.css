@@ -23,12 +23,16 @@ body {
 }
 
 #choiceTable {
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     cursor: default;
     font-family: sans-serif;
     font-size: 20px;
     text-align: center;
-    width: 942px;
-    height: 311px;
+    min-width: 500px;
+    height: auto;
 }
 
 #choiceTable td {
