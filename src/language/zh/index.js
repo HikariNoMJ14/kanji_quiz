@@ -9,8 +9,6 @@ let answer = 2;
 let ques = 1;
 let answ = 2;
 
-let kj = [];
-
 let left;
 let score = 0;
 let level;
@@ -35,27 +33,27 @@ let kana;
 let kanatoenglish;
 
 function batsu() {
-    // console.log('batsu');
-    document.getElementById("unknown").innerHTML = "<img id='image' src='./images/batsu.GIF' name='batsu'>";
+    console.log('batsu');
+    document.getElementById("unknown").innerHTML = "<img id='image' src='../../images/batsu.GIF' name='batsu'>";
 }
 
 function maru() {
-    // console.log('maru');
-    document.getElementById("unknown").innerHTML = "<img id='image' src='./images/maru.GIF' name='maru'>";
+    console.log('maru');
+    document.getElementById("unknown").innerHTML = "<img id='image' src='../../images/maru.GIF' name='maru'>";
 }
 
 function cleare() {
-    // console.log('cleare');
+    console.log('cleare');
     document.getElementById("unknown").innerHTML = "";
 }
 
 function cleark() {
-    // console.log('cleark');
+    console.log('cleark');
     document.getElementById("unknown").innerHTML = " ";
 }
 
 function checkanswer(e) {
-    // console.log('checkanswer');
+    console.log('checkanswer');
     if (notyet == false) {
         if (e == x) yes();
         else no();
@@ -63,7 +61,7 @@ function checkanswer(e) {
 }
 
 function yes() {
-    // console.log('yes');
+    console.log('yes');
     cleark();
 
     notyet = true;
@@ -77,7 +75,7 @@ function yes() {
 }
 
 function no() {
-    // console.log('no');
+    console.log('no');
     cleark();
 
     notyet = true;
@@ -90,7 +88,7 @@ function no() {
 }
 
 function choice() {
-    // console.log('choice');
+    console.log('choice');
     var g = 0;
     while (g == 0) {
         h = Math.random();
@@ -102,7 +100,7 @@ function choice() {
 }
 
 function otherchoice() {
-    // console.log('otherchoice');
+    console.log('otherchoice');
     let i = 0;
     let done = 0;
 
@@ -117,7 +115,7 @@ function otherchoice() {
                 done = 0;
             }
             if (f[i] > 0) {
-                if (kj[o][1] == kj[f[i]][1]) {
+                if (hz[o][1][0] == hz[f[i]][1][0]) {
                     done = 0;
                 }
             }
@@ -125,29 +123,29 @@ function otherchoice() {
     }
 }
 
-function choosekana(file) {
-    // console.log('choosekana');
-    kana = Math.random();
-
-    kana = kana * (kj[file].length - 2);
-    kana = Math.ceil(kana) + 1;
-    if (biglevel == 1 && file == x) {
-        kana = itemlocbig[h];
-    }
-}
+// function choosekana(file) {
+//      console.log('choosekana');
+//     kana = Math.random();
+//
+//     kana = kana * (hz[file].length - 2);
+//     kana = Math.ceil(kana) + 1;
+//     if (biglevel == 1 && file == x) {
+//         kana = itemlocbig[h];
+//     }
+// }
 
 function answerSlot(button) {
-    // console.log('answerSlot');
+    console.log('answerSlot', button, c);
     if (c == button)
         return 1;
     return 0;
 }
 
 function crosshash(ovalue, xvalue) {
-    // console.log('crosshash');
-    for (let countx = 0; countx <= (kj[xvalue].length - 1); countx = countx + 1) {
-        for (let counto = 0; counto <= (kj[ovalue].length - 1); counto = counto + 1) {
-            if ((kj[ovalue][counto]) == (kj[xvalue][countx])) {
+    console.log('crosshash');
+    for (let countx = 0; countx <= 4; countx = countx + 1) {
+        for (let counto = 0; counto <= 4; counto = counto + 1) {
+            if ((hz[ovalue][counto]) == (hz[xvalue][countx])) {
                 again = 1;
             }
         }
@@ -160,7 +158,7 @@ function crosshash(ovalue, xvalue) {
 }
 
 function choices(x, kanatoenglish) {
-    // console.log('choices');
+    console.log('choices');
     for (let i = 1; i <= 8; i++) {
         f[i] = 0
     }
@@ -171,18 +169,20 @@ function choices(x, kanatoenglish) {
 
     for (let j = 1; j < 9; j++) {
         if (answerSlot(j) != 0) {
-            if (answer == 2)
-                document.getElementById(j).innerHTML = kj[x][1];
-            if (answer == 3) {
-                choosekana(x);
-                if (question == 2) {
-                    kana = kanatoenglish
-                }
-                document.getElementById(j).innerHTML = kj[x][kana];
+            if (answer == 2) {
+                document.getElementById(j).innerHTML = hz[x][1][0];
             }
-            if (answer == 1)
-                document.getElementById(j).innerHTML = kj[x][0];
-            f[j] = x
+            // if (answer == 3) {
+            //     choosekana(x);
+            //     if (question == 2) {
+            //         kana = kanatoenglish
+            //     }
+            //     document.getElementById(j).innerHTML = hz[x][kana];
+            // }
+            if (answer == 1) {
+                document.getElementById(j).innerHTML = hz[x][0];
+            }
+            f[j] = x;
         }
         else {
             let chooseAgain = 1;
@@ -190,19 +190,20 @@ function choices(x, kanatoenglish) {
                 chooseAgain = 0;
                 otherchoice();
                 crosshash(o, x);
-                if (answer == 2)
-                    document.getElementById(j).innerHTML = kj[o][1];
-                if (answer == 3) {
-                    choosekana(o);
-                    document.getElementById(j).innerHTML = kj[o][kana];
-                    differentAnswer[j] = kj[o][kana];
-                    for (let ocCount = 1; ocCount < j; ocCount++) {
-                        if (differentAnswer[ocCount] == kj[o][kana])
-                            chooseAgain = 1;
-                    }
+                if (answer == 2) {
+                    document.getElementById(j).innerHTML = hz[o][1][0];
                 }
+                // if (answer == 3) {
+                //     choosekana(o);
+                //     document.getElementById(j).innerHTML = hz[o][kana];
+                //     differentAnswer[j] = hz[o][kana];
+                //     for (let ocCount = 1; ocCount < j; ocCount++) {
+                //         if (differentAnswer[ocCount] == hz[o][kana])
+                //             chooseAgain = 1;
+                //     }
+                // }
                 if (answer == 1)
-                    document.getElementById(j).innerHTML = kj[o][0];
+                    document.getElementById(j).innerHTML = hz[o][0];
             }
             f[j] = o;
         }
@@ -213,13 +214,13 @@ function choices(x, kanatoenglish) {
 }
 
 function setformat(que, ans) {
-    // console.log('setformat');
+    console.log('setformat');
     ques = que;
     answ = ans;
 }
 
 function sameway() {
-    // console.log('sameway');
+    console.log('sameway');
     left = itemnumber;
     document.getElementById("leftfield").innerHTML = left;
 
@@ -243,7 +244,8 @@ function setLevel() {
         memorycount[levelplacecount] = 1;
         itemlocbig[levelplacecount] = kanawereusing;
         kanawereusing = kanawereusing + 1;
-        if ((kanawereusing - 1) > (kj[biglevelplacecount].length - 2)) {
+
+        if ((kanawereusing - 1) > (hz[biglevelplacecount].length - 2)) {
             biglevelplacecount = biglevelplacecount + 1;
             kanawereusing = 2;
         }
@@ -251,7 +253,7 @@ function setLevel() {
 }
 
 function newkanji() {
-    // console.log('newkanji');
+    console.log('newkanji');
     cleark();
     cleare();
 
@@ -260,14 +262,14 @@ function newkanji() {
     choice();
 
     if (question == 2)
-        document.getElementById("unknown").innerHTML = kj[x][1];
-    if (question == 3) {
-        choosekana(x);
-        kanatoenglish = kana;
-        document.getElementById("unknown").innerHTML = kj[x][kana];
-    }
+        document.getElementById("unknown").innerHTML = hz[x][1][0];
+    // if (question == 3) {
+    //     choosekana(x);
+    //     kanatoenglish = kana;
+    //     document.getElementById("unknown").innerHTML = hz[x][kana];
+    // }
     if (question == 1) {
-        document.getElementById("unknown").innerHTML = kj[x][0];
+        document.getElementById("unknown").innerHTML = hz[x][0];
     }
 
     document.getElementById("debugfield").innerHTML = h;
@@ -275,7 +277,7 @@ function newkanji() {
 }
 
 function startquiz() {
-    // console.log('startquiz');
+    console.log('startquiz');
     question = ques;
     answer = answ;
     badlevel = 1;
@@ -289,7 +291,7 @@ function startquiz() {
         if (answer == 3) {
             biglevel = 1
         }
-        level = prompt('Scegli livello: 1-67, o 1a-6a, o tutti');
+        level = prompt('Change level: 1-166, or 1a-6a, or all');
 
         if (parseInt(level) < 68) {
             badlevel = 0;
@@ -307,7 +309,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount < 16; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount + level * 15 - 15;
-                    left = left + (kj[biglevelplacecount].length - 2);
+                    left = left + (hz[biglevelplacecount].length - 2);
                 }
                 biglevelplacecount = level * 15 - 14;
                 setLevel();
@@ -340,7 +342,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount < 101; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount + level * 1 - 100;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = level * 1 - 99;
                 setLevel();
@@ -361,7 +363,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 1;
                 setLevel();
@@ -381,7 +383,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 160; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount + 80;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 81;
                 setLevel();
@@ -401,7 +403,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 200; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount + 240;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 241;
                 setLevel();
@@ -421,7 +423,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 199; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount + 440;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 441;
                 setLevel();
@@ -441,7 +443,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 185; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount + 639;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 640;
                 setLevel();
@@ -461,7 +463,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 181; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount + 824;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 825;
                 setLevel();
@@ -481,7 +483,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 1;
                 setLevel();
@@ -502,7 +504,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 1;
                 setLevel();
@@ -523,7 +525,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 1;
                 setLevel();
@@ -544,7 +546,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 1;
                 setLevel();
@@ -565,7 +567,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 1005; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 1;
                 setLevel();
@@ -585,7 +587,7 @@ function startquiz() {
                 left = 0;
                 for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
                     biglevelplacecount = levelplacecount;
-                    left = left + kj[biglevelplacecount].length - 2;
+                    left = left + hz[biglevelplacecount].length - 2;
                 }
                 biglevelplacecount = 1;
                 setLevel();
@@ -611,7 +613,7 @@ function startquiz() {
 }
 
 function quizproceed() {
-    // console.log('quizproceed');
+    console.log('quizproceed');
     let ascore;
 
     document.getElementById("leftfield").innerHTML = left;
