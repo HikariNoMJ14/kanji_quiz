@@ -137,7 +137,7 @@ function choosekana(file) {
 }
 
 function answerSlot(button) {
-    console.log('answerSlot', c, button);
+    console.log('answerSlot');
     if (c == button)
         return 1;
     return 0;
@@ -149,7 +149,6 @@ function crosshash(ovalue, xvalue) {
         for (let counto = 0; counto <= (kj[ovalue].length - 1); counto = counto + 1) {
             console.log(kj[ovalue][counto], kj[xvalue][countx]);
             if ((kj[ovalue][counto]) == (kj[xvalue][countx])) {
-                console.log('!!!!!!!!');
                 again = 1;
             }
         }

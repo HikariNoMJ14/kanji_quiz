@@ -14,9 +14,6 @@ let score = 0;
 let level;
 let itemnumber;
 let notyet = true;
-
-let biglevelplacecount = 0;
-let biglevel = 0;
 let donothing = 0;
 
 let overscore = 0;
@@ -29,8 +26,6 @@ let x;
 let o;
 let c;
 let h;
-let kana;
-let kanatoenglish;
 
 function batsu() {
     console.log('batsu');
@@ -123,19 +118,21 @@ function otherchoice() {
     }
 }
 
-// function choosekana(file) {
-//      console.log('choosekana');
-//     kana = Math.random();
-//
-//     kana = kana * (hz[file].length - 2);
-//     kana = Math.ceil(kana) + 1;
-//     if (biglevel == 1 && file == x) {
-//         kana = itemlocbig[h];
-//     }
-// }
+function choosetranslation(file) {
+    console.log('choosetranslation');
+    let trans = Math.random();
+
+    trans = trans * (hz[file][1].length);
+    trans = Math.floor(trans);
+
+    if (file == x) {
+        trans = itemlocbig[h];
+    }
+    return trans;
+}
 
 function answerSlot(button) {
-    console.log('answerSlot', button, c);
+    console.log('answerSlot');
     if (c == button)
         return 1;
     return 0;
@@ -157,7 +154,7 @@ function crosshash(ovalue, xvalue) {
     }
 }
 
-function choices(x, kanatoenglish) {
+function choices(x) {
     console.log('choices');
     for (let i = 1; i <= 8; i++) {
         f[i] = 0
@@ -169,16 +166,13 @@ function choices(x, kanatoenglish) {
 
     for (let j = 1; j < 9; j++) {
         if (answerSlot(j) != 0) {
-            if (answer == 2) {
-                document.getElementById(j).innerHTML = hz[x][1][0];
+            if (answer == 3) {
+                document.getElementById(j).innerHTML = hz[x][2];
             }
-            // if (answer == 3) {
-            //     choosekana(x);
-            //     if (question == 2) {
-            //         kana = kanatoenglish
-            //     }
-            //     document.getElementById(j).innerHTML = hz[x][kana];
-            // }
+            if (answer == 2) {
+                let trans = choosetranslation(x);
+                document.getElementById(j).innerHTML = hz[x][1][trans];
+            }
             if (answer == 1) {
                 document.getElementById(j).innerHTML = hz[x][0];
             }
@@ -190,18 +184,13 @@ function choices(x, kanatoenglish) {
                 chooseAgain = 0;
                 otherchoice();
                 crosshash(o, x);
-                if (answer == 2) {
-                    document.getElementById(j).innerHTML = hz[o][1][0];
+                if (answer == 3) {
+                    document.getElementById(j).innerHTML = hz[o][2];
                 }
-                // if (answer == 3) {
-                //     choosekana(o);
-                //     document.getElementById(j).innerHTML = hz[o][kana];
-                //     differentAnswer[j] = hz[o][kana];
-                //     for (let ocCount = 1; ocCount < j; ocCount++) {
-                //         if (differentAnswer[ocCount] == hz[o][kana])
-                //             chooseAgain = 1;
-                //     }
-                // }
+                if (answer == 2) {
+                    let trans = choosetranslation(o);
+                    document.getElementById(j).innerHTML = hz[o][1][trans];
+                }
                 if (answer == 1)
                     document.getElementById(j).innerHTML = hz[o][0];
             }
@@ -232,48 +221,28 @@ function sameway() {
         newkanji();
 }
 
-function setLevel() {
-    console.log('setLevel');
-    itemnumber = left;
-    kanawereusing = 2;
-
-    for (let levelplacecount = 1; levelplacecount < left + 1; levelplacecount = levelplacecount + 1) {
-        itemloc[levelplacecount] = biglevelplacecount;
-        itemlocstated = biglevelplacecount;
-        itemcount[levelplacecount] = 1;
-        memorycount[levelplacecount] = 1;
-        itemlocbig[levelplacecount] = kanawereusing;
-        kanawereusing = kanawereusing + 1;
-
-        if ((kanawereusing - 1) > (hz[biglevelplacecount].length - 2)) {
-            biglevelplacecount = biglevelplacecount + 1;
-            kanawereusing = 2;
-        }
-    }
-}
-
 function newkanji() {
     console.log('newkanji');
     cleark();
     cleare();
 
     notyet = false;
-    kanatoenglish = 0;
+
     choice();
 
-    if (question == 2)
-        document.getElementById("unknown").innerHTML = hz[x][1][0];
-    // if (question == 3) {
-    //     choosekana(x);
-    //     kanatoenglish = kana;
-    //     document.getElementById("unknown").innerHTML = hz[x][kana];
-    // }
+    if (question == 3) {
+        document.getElementById("unknown").innerHTML = hz[x][2];
+    }
+    if (question == 2) {
+        let trans = choosetranslation(x);
+        document.getElementById("unknown").innerHTML = hz[x][1][trans];
+    }
     if (question == 1) {
         document.getElementById("unknown").innerHTML = hz[x][0];
     }
 
     document.getElementById("debugfield").innerHTML = h;
-    choices(x, kanatoenglish);
+    choices(x);
 }
 
 function startquiz() {
@@ -285,17 +254,11 @@ function startquiz() {
     while (badlevel == 1) {
         badlevel = 1;
 
-        if (question == 3) {
-            biglevel = 1
-        }
-        if (answer == 3) {
-            biglevel = 1
-        }
-        level = prompt('Change level: 1-166, or 1a-6a, or all');
+        level = prompt('Change level: 1-166, or 1st-4th, or all');
 
-        if (parseInt(level) < 68) {
+        if (parseInt(level) < 165) {
             badlevel = 0;
-            itemnumber = 15;
+            itemnumber = Math.min(15);
             left = itemnumber;
 
             for (let levelplacecount = 1; levelplacecount < left + 1; levelplacecount = levelplacecount + 1) {
@@ -304,54 +267,27 @@ function startquiz() {
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
-
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount < 16; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount + level * 15 - 15;
-                    left = left + (hz[biglevelplacecount].length - 2);
-                }
-                biglevelplacecount = level * 15 - 14;
-                setLevel();
-            }
         }
 
         if (
-            parseInt(level) == 100 ||
-            parseInt(level) == 200 ||
-            parseInt(level) == 300 ||
-            parseInt(level) == 400 ||
-            parseInt(level) == 500 ||
-            parseInt(level) == 600 ||
-            parseInt(level) == 700 ||
-            parseInt(level) == 800 ||
-            parseInt(level) == 900 ||
-            parseInt(level) == 1000
+            level == '100s' || level == '200s' || level == '300s' ||
+            level == '400s' || level == '500s' || level == '600s' ||
+            level == '700s' || level == '800s' || level == '900s' || level == '1000s'
         ) {
             badlevel = 0;
             itemnumber = 100;
             left = itemnumber;
             for (let levelplacecount = 1; levelplacecount < left + 1; levelplacecount = levelplacecount + 1) {
-                itemloc[levelplacecount] = levelplacecount + level * 1 - 100;
-                itemlocstated = levelplacecount + level * 1 - 100;
+                itemloc[levelplacecount] = levelplacecount + level.replace('s', '') * 1 - 100;
+                itemlocstated = levelplacecount + level.replace('s', '') * 1 - 100;
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
-
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount < 101; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount + level * 1 - 100;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = level * 1 - 99;
-                setLevel();
-            }
         }
 
-        if (level == '1a') {
+        if (level == '1st') {
             badlevel = 0;
-            left = 80;
+            left = 322;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
                 itemloc[levelplacecount] = levelplacecount;
@@ -359,19 +295,11 @@ function startquiz() {
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 1;
-                setLevel();
-            }
         }
-        if (level == '2a') {
+
+        if (level == '2nd') {
             badlevel = 0;
-            left = 160;
+            left = 180;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
                 itemloc[levelplacecount] = levelplacecount + 80;
@@ -379,19 +307,11 @@ function startquiz() {
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 160; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount + 80;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 81;
-                setLevel();
-            }
         }
-        if (level == '3a') {
+
+        if (level == '3rd') {
             badlevel = 0;
-            left = 200;
+            left = 497;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
                 itemloc[levelplacecount] = levelplacecount + 240;
@@ -399,19 +319,11 @@ function startquiz() {
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 200; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount + 240;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 241;
-                setLevel();
-            }
         }
-        if (level == '4a') {
+
+        if (level == '4th') {
             badlevel = 0;
-            left = 199;
+            left = 1482;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
                 itemloc[levelplacecount] = levelplacecount + 440;
@@ -419,80 +331,47 @@ function startquiz() {
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 199; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount + 440;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 441;
-                setLevel();
-            }
         }
-        if (level == '5a') {
-            badlevel = 0;
-            left = 185;
-            itemnumber = left;
-            for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
-                itemloc[levelplacecount] = levelplacecount + 639;
-                itemlocstated = levelplacecount + 639;
-                itemcount[levelplacecount] = 1;
-                memorycount[levelplacecount] = 1;
-            }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 185; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount + 639;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 640;
-                setLevel();
-            }
-        }
-        if (level == '6a') {
-            badlevel = 0;
-            left = 181;
-            itemnumber = left;
-            for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
-                itemloc[levelplacecount] = levelplacecount + 824;
-                itemlocstated = levelplacecount + 824;
-                itemcount[levelplacecount] = 1;
-                memorycount[levelplacecount] = 1;
-            }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 181; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount + 824;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 825;
-                setLevel();
-            }
-        }
+
+        // if (level == '5th') {
+        //     badlevel = 0;
+        //     left = 185;
+        //     itemnumber = left;
+        //     for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
+        //         itemloc[levelplacecount] = levelplacecount + 639;
+        //         itemlocstated = levelplacecount + 639;
+        //         itemcount[levelplacecount] = 1;
+        //         memorycount[levelplacecount] = 1;
+        //     }
+        // }
+        //
+        // if (level == '6th') {
+        //     badlevel = 0;
+        //     left = 181;
+        //     itemnumber = left;
+        //     for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
+        //         itemloc[levelplacecount] = levelplacecount + 824;
+        //         itemlocstated = levelplacecount + 824;
+        //         itemcount[levelplacecount] = 1;
+        //         memorycount[levelplacecount] = 1;
+        //     }
+        // }
+
         if (level == '1-2') {
             badlevel = 0;
-            left = 240;
+            left = 502;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
                 itemloc[levelplacecount] = levelplacecount;
                 itemlocstated = levelplacecount;
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
-            }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 1;
-                setLevel();
             }
         }
 
         if (level == '1-3') {
             badlevel = 0;
-            left = 440;
+            left = 999;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
                 itemloc[levelplacecount] = levelplacecount;
@@ -500,97 +379,18 @@ function startquiz() {
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 1;
-                setLevel();
-            }
         }
 
-        if (level == '1-4') {
+
+        if (level == '1-4' || level == 'all')  {
             badlevel = 0;
-            left = 640;
+            left = 2481;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
                 itemloc[levelplacecount] = levelplacecount;
                 itemlocstated = levelplacecount;
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
-            }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 1;
-                setLevel();
-            }
-        }
-
-        if (level == '1-5') {
-            badlevel = 0;
-            left = 825;
-            itemnumber = left;
-            for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
-                itemloc[levelplacecount] = levelplacecount;
-                itemlocstated = levelplacecount;
-                itemcount[levelplacecount] = 1;
-                memorycount[levelplacecount] = 1;
-            }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 1;
-                setLevel();
-            }
-        }
-
-        if (level == 'tutti') {
-            badlevel = 0;
-            left = 1005;
-            itemnumber = left;
-            for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
-                itemloc[levelplacecount] = levelplacecount;
-                itemlocstated = levelplacecount;
-                itemcount[levelplacecount] = 1;
-                memorycount[levelplacecount] = 1;
-            }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 1005; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 1;
-                setLevel();
-            }
-        }
-
-        if (level == '2-3') {
-            badlevel = 0;
-            left = 360;
-            itemnumber = left;
-            for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
-                itemloc[levelplacecount] = levelplacecount + 80;
-                itemcount[levelplacecount] = 1;
-                memorycount[levelplacecount] = 1;
-            }
-            if (biglevel == 1) {
-                left = 0;
-                for (let levelplacecount = 1; levelplacecount <= 80; levelplacecount = levelplacecount + 1) {
-                    biglevelplacecount = levelplacecount;
-                    left = left + hz[biglevelplacecount].length - 2;
-                }
-                biglevelplacecount = 1;
-                setLevel();
             }
         }
 
@@ -610,6 +410,22 @@ function startquiz() {
     }
     document.getElementById("leftfield").innerHTML = left;
     notyet = false;
+
+    if (ques == 1) {
+        document.getElementById("unknown").className = "bigText";
+    } else if (ques == 2) {
+        document.getElementById("unknown").className = "smallText";
+    } else if (ques == 3) {
+        document.getElementById("unknown").className = "mediumText";
+    }
+
+    if (answ == 1) {
+        document.getElementById("choicetable").className = "bigText";
+    } else if (answ == 2) {
+        document.getElementById("choicetable").className = "smallText";
+    } else if (answ == 3) {
+        document.getElementById("choicetable").className = "mediumText";
+    }
 }
 
 function quizproceed() {

@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
-<span id="unknown"></span>
+<span id="unknown" class="bigText"></span>
 <span id="result"></span>
 
-<table id="choicetable" cellSpacing="7" cellPadding="0" border="0">
+<table id="choicetable" class="smallText" cellSpacing="7" cellPadding="0" border="0">
     <tbody>
     <tr>
         <td onmouseup="checkanswer(f[1])"><span id="1">*</span></td>
@@ -63,9 +63,9 @@
 
     <form id="formatform">
         <div><input onclick="setformat(1,2)" type="radio" name="kanji" value="0" checked>Hanzi -> English</div>
-        <!--<div><input onclick="setformat(1,3)" type="radio" name="kanji" value="1">Kanji -> Kana</div>-->
-        <!--<div><input onclick="setformat(2,1)" type="radio" name="kanji" value="2">Italiano -> Kanji</div>-->
-        <!--<div><input onclick="setformat(3,1)" type="radio" name="kanji" value="3">Kana -> Kanji</div>-->
+        <div><input onclick="setformat(2,1)" type="radio" name="kanji" value="2">English -> Hanzi</div>
+        <div><input onclick="setformat(3,1)" type="radio" name="kanji" value="3">Zhuyin -> Hanzi</div>
+        <div><input onclick="setformat(1,3)" type="radio" name="kanji" value="1">Hanzi -> Zhuyin</div>
     </form>
 </div>
 </body>
