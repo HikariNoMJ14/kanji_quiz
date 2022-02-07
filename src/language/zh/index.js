@@ -453,7 +453,7 @@ function quizproceed() {
             if (score >= 73) ascore = "B";
             if (score >= 83) ascore = "A";
         }
-        if (score == 100) ascore = "PERFETTO";
+        if (score == 100) ascore = "PERFECT";
         cleare();
         cleark();
         document.getElementById("unknown").innerHTML = ascore;
