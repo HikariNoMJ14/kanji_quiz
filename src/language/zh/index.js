@@ -256,7 +256,7 @@ function startquiz() {
 
         level = prompt('Change level: 1-166, or 1st-4th, or all');
 
-        if (parseInt(level) < 165) {
+        if (parseInt(level) == level && parseInt(level) < 165) {
             badlevel = 0;
             itemnumber = Math.min(15);
             left = itemnumber;
@@ -400,7 +400,7 @@ function startquiz() {
             donothing = 1;
         }
         if (badlevel == 1) {
-            alert('Livello non valido. Riprova');
+            alert('Invalid level. Try again');
         }
     }
     score = 1;
