@@ -302,8 +302,8 @@ function startquiz() {
             left = 180;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
-                itemloc[levelplacecount] = levelplacecount + 80;
-                itemlocstated = levelplacecount + 80;
+                itemloc[levelplacecount] = levelplacecount + 322;
+                itemlocstated = levelplacecount + 322;
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
@@ -314,8 +314,8 @@ function startquiz() {
             left = 497;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
-                itemloc[levelplacecount] = levelplacecount + 240;
-                itemlocstated = levelplacecount + 240;
+                itemloc[levelplacecount] = levelplacecount + 322 + 180;
+                itemlocstated = levelplacecount + 322 + 180;
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
@@ -326,8 +326,8 @@ function startquiz() {
             left = 1482;
             itemnumber = left;
             for (let levelplacecount = 1; levelplacecount <= left; levelplacecount = levelplacecount + 1) {
-                itemloc[levelplacecount] = levelplacecount + 440;
-                itemlocstated = levelplacecount + 440;
+                itemloc[levelplacecount] = levelplacecount + 322 + 180 + 497;
+                itemlocstated = levelplacecount + 322 + 180 + 497;
                 itemcount[levelplacecount] = 1;
                 memorycount[levelplacecount] = 1;
             }
