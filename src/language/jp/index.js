@@ -9,7 +9,7 @@ let answer = 2;
 let ques = 1;
 let answ = 2;
 
-let kj = [];
+// let kj = [];
 
 let left;
 let score = 0;
