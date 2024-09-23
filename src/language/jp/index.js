@@ -36,22 +36,22 @@ let kanatoenglish;
 
 function batsu() {
     console.log('batsu');
-    document.getElementById("unknown").innerHTML = "<img id='image' src='../../images/batsu.GIF' name='batsu'>";
+    document.getElementById("hint").innerHTML = "<img id='image' src='../../images/batsu.GIF' name='batsu'>";
 }
 
 function maru() {
     console.log('maru');
-    document.getElementById("unknown").innerHTML = "<img id='image' src='../../images/maru.GIF' name='maru'>";
+    document.getElementById("hint").innerHTML = "<img id='image' src='../../images/maru.GIF' name='maru'>";
 }
 
 function cleare() {
     console.log('cleare');
-    document.getElementById("unknown").innerHTML = "";
+    document.getElementById("hint").innerHTML = "";
 }
 
 function cleark() {
     console.log('cleark');
-    document.getElementById("unknown").innerHTML = " ";
+    document.getElementById("hint").innerHTML = " ";
 }
 
 function checkanswer(e) {
@@ -261,14 +261,14 @@ function newkanji() {
     choice();
 
     if (question == 2)
-        document.getElementById("unknown").innerHTML = kj[x][1];
+        document.getElementById("hint").innerHTML = kj[x][1];
     if (question == 3) {
         choosekana(x);
         kanatoenglish = kana;
-        document.getElementById("unknown").innerHTML = kj[x][kana];
+        document.getElementById("hint").innerHTML = kj[x][kana];
     }
     if (question == 1) {
-        document.getElementById("unknown").innerHTML = kj[x][0];
+        document.getElementById("hint").innerHTML = kj[x][0];
     }
 
     document.getElementById("debugfield").innerHTML = h;
@@ -639,6 +639,6 @@ function quizproceed() {
         if (score == 100) ascore = "PERFETTO";
         cleare();
         cleark();
-        document.getElementById("unknown").innerHTML = ascore;
+        document.getElementById("hint").innerHTML = ascore;
     }
 }

@@ -1,6 +1,7 @@
 body {
-    background-color: black;
+    background-color: darkblue;
     color: white;
+    font-family: sans-serif;
 }
 
 .smallText {
@@ -15,7 +16,7 @@ body {
     font-size: 100px;
 }
 
-#unknown {
+#hint {
     display: flex;
     justify-content: center;
     COLOR: white;
@@ -57,7 +58,8 @@ body {
 }
 
 #choiceTable td {
-    background-color: darkolivegreen;
+    background-color: limegreen;
+    border: 2px solid white;
     width: 400px;
     height: 200px;
     padding: 10px;
@@ -77,22 +79,16 @@ body {
 
 #changegame {
     CURSOR: default;
-    FONT-FAMILY: sans-serif;
-    width: 240px;
+    font-family: sans-serif;
+    width: 500px;
 }
 
-#newquizfield {
-    background-color: darkblue;
+.button {
+    background-color: yellow;
+    color: black;
     cursor: hand;
-    height: 35px;
-    text-align: center;
-}
-
-#samequizfield {
-    background-color: darkblue;
-    width: 120px;
-    cursor: hand;
-    height: 35px;
+    height: 50px;
+    font-size: 24px;
     text-align: center;
 }
 
@@ -110,4 +106,3 @@ body {
     width: 150px;
     text-align: left;
 }
-
