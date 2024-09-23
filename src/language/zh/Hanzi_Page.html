@@ -1,0 +1,72 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=x-sjis">
+    <title>Hanzi Page</title>
+
+    <script language="javascript" src="index.js"></script>
+    <script language="javascript" src="tocfl.js"></script>
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<span id="unknown" class="bigText"></span>
+<span id="result"></span>
+
+<table id="choicetable" class="smallText" cellSpacing="7" cellPadding="0" border="0">
+    <tbody>
+    <tr>
+        <td onmouseup="checkanswer(f[1])"><span id="1">*</span></td>
+        <td onmouseup="checkanswer(f[2])"><span id="2">*</span></td>
+        <td onmouseup="checkanswer(f[3])"><span id="3">*</span></td>
+        <td onmouseup="checkanswer(f[4])"><span id="4">*</span></td>
+    </tr>
+    <tr>
+        <td onmouseup="checkanswer(f[5])"><span id="5">*</span></td>
+        <td onmouseup="checkanswer(f[6])"><span id="6">*</span></td>
+        <td onmouseup="checkanswer(f[7])"><span id="7">*</span></td>
+        <td onmouseup="checkanswer(f[8])"><span id="8">*</span></td>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+
+<div id="controls">
+    <table id="changegame" cellSpacing="7" cellPadding="0" border="0">
+        <tbody>
+        <tr>
+            <td id="newquizfield" onmouseup="startquiz()">New Game</td>
+        </tr>
+        <tr>
+            <td id="samequizfield" onmouseup="sameway()">Same Game</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table id="stats" cellSpacing="7" cellPadding="0" border="0">
+        <tbody>
+        <tr>
+            <td id="leveltextfield">Level:</td>
+            <td id="levelfield"></td>
+        </tr>
+        <tr>
+            <td id="lefttextfield">Left:</td>
+            <td id="leftfield"></td>
+        </tr>
+        <tr>
+            <td id="debugtextfield">Index:</td>
+            <td id="debugfield"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br/>
+
+    <form id="formatform">
+        <div><input onclick="setformat(1,2)" type="radio" name="kanji" value="0" checked>Hanzi -> English</div>
+        <div><input onclick="setformat(2,1)" type="radio" name="kanji" value="2">English -> Hanzi</div>
+        <div><input onclick="setformat(3,1)" type="radio" name="kanji" value="3">Zhuyin -> Hanzi</div>
+        <div><input onclick="setformat(1,3)" type="radio" name="kanji" value="1">Hanzi -> Zhuyin</div>
+    </form>
+</div>
+</body>
+</html>

@@ -3,11 +3,21 @@ body {
     color: white;
 }
 
+.smallText {
+    font-size: 48px;
+}
+
+.mediumText {
+    font-size: 80px;
+}
+
+.bigText {
+    font-size: 100px;
+}
+
 #unknown {
     display: flex;
     justify-content: center;
-    FONT-WEIGHT: bold;
-    FONT-SIZE: 100px;
     COLOR: white;
     height: 150px;
 }
@@ -23,24 +33,40 @@ body {
 }
 
 #choiceTable {
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     cursor: default;
     font-family: sans-serif;
-    font-size: 20px;
     text-align: center;
-    width: 942px;
-    height: 311px;
+    min-width: 500px;
+    height: auto;
+}
+
+#choiceTable.bigText {
+    font-size: 48px;
+}
+
+#choiceTable.mediumText {
+    font-size: 36px;
+}
+
+#choiceTable.smallText {
+    font-size: 20px;
 }
 
 #choiceTable td {
     background-color: darkolivegreen;
-    width: 150px;
-    height: 108px;
+    width: 400px;
+    height: 200px;
+    padding: 10px;
     cursor: hand;
     color: white;
 }
 
 #choiceTable td span {
-    width: 138px;
+    width: 100%;
 }
 
 #controls {
