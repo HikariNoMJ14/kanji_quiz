@@ -3,12 +3,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=x-sjis">
     <title>Hanzi Page</title>
 
-    <script language="javascript" src="index.js"></script>
+    <script language="javascript" src="index_2.js"></script>
     <script language="javascript" src="tocfl.js"></script>
     <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
-<span id="unknown" class="bigText"></span>
+<span id="hint" class="bigText"></span>
 <span id="result"></span>
 
 <table id="choicetable" class="smallText" cellSpacing="7" cellPadding="0" border="0">
@@ -31,13 +31,11 @@
 <br/>
 
 <div id="controls">
-    <table id="changegame" cellSpacing="7" cellPadding="0" border="0">
+    <table id="changegame" cellSpacing="10" cellPadding="0" border="0">
         <tbody>
         <tr>
-            <td id="newquizfield" onmouseup="startquiz()">New Game</td>
-        </tr>
-        <tr>
-            <td id="samequizfield" onmouseup="sameway()">Same Game</td>
+            <td class="button" id="newquizfield" onmouseup="startquiz()">New Game</td>
+            <td class="button" id="samequizfield" onmouseup="sameway()">Same Game</td>
         </tr>
         </tbody>
     </table>
