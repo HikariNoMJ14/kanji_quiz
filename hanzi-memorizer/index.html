@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanzi Memorizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+    <h1>Hanzi Memorizer</h1>
+    <div id="levelOptionsContainer">
+        <label>Select Level:</label>
+        <div id="levelOptions">
+            <!-- Radio buttons will be populated by JavaScript -->
+        </div>
+    </div>
+    <div id="gameTypeOptionsContainer">
+        <label>Select Game Type:</label>
+        <div id="gameTypeOptions">
+            <input type="radio" id="engToHanzi" name="gameType" value="engToHanzi">
+            <label for="engToHanzi">English to Hanzi</label><br>
+            <input type="radio" id="hanziToEng" name="gameType" value="hanziToEng">
+            <label for="hanziToEng">Hanzi to English</label>
+        </div>
+    </div>
+    <button id="startGame">Start Game</button>
+    <div id="gameArea">
+        <!-- Game cards will be displayed here -->
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
