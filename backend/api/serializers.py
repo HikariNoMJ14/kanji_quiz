@@ -16,4 +16,4 @@ class HanziSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Hanzi
-        fields = ['hanzi', 'zhuyin', 'topic', 'level', 'pos', 'translations', 'pinyins']
+        fields = ['id', 'hanzi', 'zhuyin', 'topic', 'level', 'pos', 'translations', 'pinyins']

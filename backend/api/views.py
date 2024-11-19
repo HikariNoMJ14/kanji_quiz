@@ -38,3 +38,17 @@ def search_hanzi(request):
 
     serializer = HanziSerializer(results, many=True)
     return Response(serializer.data)
+
+@swagger_auto_schema(
+    method='get',
+    responses={200: HanziSerializer()}
+)
+@api_view(['GET'])
+def hanzi_detail(request, id):
+    try:
+        hanzi = Hanzi.objects.get(id=id)
+    except Hanzi.DoesNotExist:
+        return Response({'error': 'Hanzi not found'}, status=404)
+
+    serializer = HanziSerializer(hanzi)
+    return Response(serializer.data)
