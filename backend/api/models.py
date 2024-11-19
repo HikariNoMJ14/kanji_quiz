@@ -3,7 +3,6 @@ from django.db import models
 class Hanzi(models.Model):
     hanzi = models.CharField(max_length=10)
     zhuyin = models.CharField(max_length=20)
-    pinyin = models.CharField(max_length=20)
     topic = models.CharField(max_length=50, blank=True)
     level = models.IntegerField()
     pos = models.CharField(max_length=10)

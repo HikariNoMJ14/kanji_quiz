@@ -13,8 +13,7 @@ class PinyinSerializer(serializers.ModelSerializer):
 
 class HanziSerializer(serializers.ModelSerializer):
     translations = TranslationSerializer(many=True, read_only=True)
-    pinyins = PinyinSerializer(many=True, read_only=True)
 
     class Meta:
         model = Hanzi
-        fields = ['hanzi', 'zhuyin', 'pinyin', 'topic', 'level', 'pos', 'translations', 'pinyins']
+        fields = ['hanzi', 'zhuyin', 'topic', 'level', 'pos', 'translations', 'pinyins']
