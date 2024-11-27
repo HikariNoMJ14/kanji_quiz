@@ -1,6 +1,7 @@
+from django.urls import include
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Hanzi
+from .models import Hanzi, Encounter
 from .serializers import HanziSerializer
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -49,6 +50,25 @@ def hanzi_detail(request, id):
         hanzi = Hanzi.objects.get(id=id)
     except Hanzi.DoesNotExist:
         return Response({'error': 'Hanzi not found'}, status=404)
+
+    serializer = HanziSerializer(hanzi)
+    return Response(serializer.data)
+
+@swagger_auto_schema(
+    method='post',
+    request_body=HanziSerializer,
+    responses={200: HanziSerializer()}
+)
+@api_view(['POST'])
+def update_encounters(request, id):
+    try:
+        hanzi = Hanzi.objects.get(id=id)
+    except Hanzi.DoesNotExist:
+        return Response({'error': 'Hanzi not found'}, status=404)
+
+    new_encounter = request.data.get('encounter')
+    if new_encounter is not None:
+        Encounter.objects.create(hanzi=hanzi, correct=new_encounter)
 
     serializer = HanziSerializer(hanzi)
     return Response(serializer.data)
