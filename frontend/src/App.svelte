@@ -2,18 +2,20 @@
   import { Router, Route } from 'svelte-routing';
   import Search from './Search.svelte';
   import WordDetail from './WordDetail.svelte';
+  import NavBar from './NavBar.svelte';
 </script>
 
-<main>
-  <h1>Hanzi Memorizer</h1>
-  <Router>
+<Router>
+  <NavBar />
+  <main>
+    <h1>Hanzi Memorizer</h1>
     <Route path="/" component={Search} />
     <Route path="/search" component={Search} />
     <Route path="/hanzi/:id" let:params>
       <WordDetail {params} />
     </Route>
-  </Router>
-</main>
+  </main>
+</Router>
 
 <style>
   main {
