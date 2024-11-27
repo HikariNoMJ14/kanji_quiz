@@ -2,9 +2,9 @@
   import { onMount } from 'svelte';
   import { BACKEND_URL } from './config';
 
-  export let params; // Ensure params is exported to receive the prop
+  export let params;
   let wordId = params.id;
-  let wordDetail = {};
+  let wordDetail = { translations: [] };
 
   onMount(async () => {
     try {
@@ -67,5 +67,4 @@
       {/each}
     </div>
   </div>
-  <!-- Add more fields as needed -->
 </div>
