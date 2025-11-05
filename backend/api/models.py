@@ -5,6 +5,7 @@ class Hanzi(models.Model):
     hanzi = models.CharField(max_length=10)
     zhuyin = models.CharField(max_length=20)
     topic = models.CharField(max_length=50, blank=True)
+    round = models.IntegerField(default=0)
     level = models.IntegerField()
     pos = models.CharField(max_length=10)
 
