@@ -2,6 +2,17 @@ import {Character} from "../types/Character";
 import {GameMode} from "../types/GameMode";
 import {GameState} from "../types/GameState";
 
+// Resolve difficulty for a given round from characters' level (round,difficulty tuple) with fallback
+export const getDifficultyForRound = (characters: Character[], roundNumber: number): number => {
+    // Find any character with this round that has a numeric level; assume level == difficulty
+    const match = characters.find(c => c.round === roundNumber && typeof c.level === 'number');
+    if (match && typeof match.level === 'number') {
+        return match.level as number;
+    }
+    // Fallback heuristic if not found
+    return Math.max(1, Math.ceil(roundNumber / 5));
+};
+
 // Select characters for a game from the provided list without using React state
 export const selectCharactersForGame = (
     gameLength: number,
@@ -58,8 +69,8 @@ export const startGame = (
         correct: false
     }));
 
-    // Determine difficulty based on the round number (example logic)
-    const determinedDifficulty = Math.max(1, Math.ceil(round / 5));
+    // Determine difficulty for the chosen round from character data (round→difficulty tuple via level), fallback to formula
+    const determinedDifficulty = getDifficultyForRound(characters, round);
 
     setGameState({
         rounds,

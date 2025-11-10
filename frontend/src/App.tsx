@@ -122,7 +122,18 @@ export default function HanziLearningApp() {
 
                     {/* Page Content */}
                     <div className="pt-24">
-                        {currentPage === 'home' && <HomePage onStartGame={handleStartGame}/>}
+                        {currentPage === 'home' && (
+                            <HomePage
+                                onStartGame={handleStartGame}
+                                maxRound={Math.max(1, ...characters.map(c => c.round || 1))}
+                                roundDifficulty={characters.reduce((acc: Record<number, number>, c) => {
+                                    if (typeof c.round === 'number' && typeof c.level === 'number' && acc[c.round] === undefined) {
+                                        acc[c.round] = c.level;
+                                    }
+                                    return acc;
+                                }, {})}
+                            />
+                        )}
                         {currentPage === 'game' && (
                             <GamePage
                                 gameState={gameState}

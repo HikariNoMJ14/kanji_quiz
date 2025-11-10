@@ -1,25 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Play} from 'lucide-react';
 import {GAME_MODES, GameMode} from "../types/GameMode";
+import RangeSlider from "./RangeSlider";
 
 interface HomePageProps {
     onStartGame: (gameLength: number, numOptions: number, gameMode: GameMode, round: number) => void;
+    maxRound: number;
+    roundDifficulty?: Record<number, number>; // map of round to difficulty
 }
 
-export const HomePage = ({onStartGame}: HomePageProps): React.ReactElement => {
-    const [difficulty, setDifficulty] = useState<number>(1);
-    const [round, setRound] = useState<number>(0);
-    const [maxRounds] = useState<{ [key: number]: number }>({});
+export const HomePage = ({onStartGame, maxRound, roundDifficulty}: HomePageProps): React.ReactElement => {
+    const [round, setRound] = useState<number>(1);
     const [gameLength, setGameLength] = useState<number>(10);
     const [numOptions, setNumOptions] = useState<number>(4);
     const [selectedMode, setSelectedMode] = useState<GameMode>(GAME_MODES[0]);
 
-    // Update round when difficulty changes
-    useEffect(() => {
-        if (maxRounds[difficulty]) {
-            setRound(0);
-        }
-    }, [difficulty]);
+    const difficulty = useMemo(() => {
+        const mapped = roundDifficulty?.[round];
+        return typeof mapped === 'number' ? mapped : Math.max(1, Math.ceil(round / 5));
+    }, [round, roundDifficulty]);
 
     return (
         <div className="max-w-md mx-auto">
@@ -50,65 +49,32 @@ export const HomePage = ({onStartGame}: HomePageProps): React.ReactElement => {
                         </select>
                     </div>
 
-                    <div>
-                        <label className="block text-sm font-medium mb-3 text-white/90">Game
-                            Length: {gameLength} rounds</label>
-                        <div className="relative">
-                            <input
-                                type="range"
-                                min="5"
-                                max="20"
-                                value={gameLength}
-                                onChange={(e) => setGameLength(parseInt(e.target.value))}
-                                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
-                            />
-                        </div>
-                    </div>
+                    <RangeSlider
+                        label="Game Length"
+                        min={5}
+                        max={20}
+                        value={gameLength}
+                        onChange={setGameLength}
+                        valueText={`${gameLength} rounds`}
+                    />
 
-                    <div>
-                        <label className="block text-sm font-medium mb-3 text-white/90">Number of
-                            Options: {numOptions}</label>
-                        <div className="relative">
-                            <input
-                                type="range"
-                                min="2"
-                                max="6"
-                                value={numOptions}
-                                onChange={(e) => setNumOptions(parseInt(e.target.value))}
-                                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
-                            />
-                        </div>
-                    </div>
+                    <RangeSlider
+                        label="Number of Options"
+                        min={2}
+                        max={6}
+                        value={numOptions}
+                        onChange={setNumOptions}
+                        valueText={`${numOptions}`}
+                    />
 
-                    <div>
-                        <label className="block text-sm font-medium mb-3 text-white/90">Difficulty
-                            Level: {difficulty}</label>
-                        <div className="relative">
-                            <input
-                                type="range"
-                                min="1"
-                                max="5"
-                                value={difficulty}
-                                onChange={(e) => setDifficulty(parseInt(e.target.value))}
-                                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
-                            />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium mb-3 text-white/90">Round: {round} -
-                            Difficulty: {Math.ceil(round / 5)}</label>
-                        <div className="relative">
-                            <input
-                                type="range"
-                                min="0"
-                                max={maxRounds[difficulty] || 0}
-                                value={round}
-                                onChange={(e) => setRound(parseInt(e.target.value))}
-                                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer slider"
-                            />
-                        </div>
-                    </div>
+                    <RangeSlider
+                        label="Round"
+                        min={1}
+                        max={Math.max(1, maxRound)}
+                        value={round}
+                        onChange={setRound}
+                        valueText={`${round} — Difficulty ${difficulty}`}
+                    />
 
                     <button
                         onClick={() => onStartGame(gameLength, numOptions, selectedMode, round)}
